@@ -66,6 +66,7 @@ class _ForgotViewState extends State<ForgotView> {
                   children: [
                     AuthTextFormField(
                       controller: emailController,
+                      textInputType: TextInputType.emailAddress,
                       hintText: 'EMAIL',
                     ),
 
