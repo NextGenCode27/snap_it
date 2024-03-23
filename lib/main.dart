@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_it/core/secrets/storage_secrets.dart';
 import 'package:snap_it/core/services/shared_pref.dart';
 import 'package:snap_it/core/themes/bloc/theme_bloc.dart';
 import 'package:snap_it/core/themes/dark_theme.dart';
 import 'package:snap_it/core/themes/light_theme.dart';
+import 'package:snap_it/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:snap_it/features/onboard/presentation/bloc/onboard_bloc.dart';
 import 'package:snap_it/features/onboard/presentation/views/onboard_view.dart';
 import 'package:snap_it/init_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final isDarkMode = await SharedPref().getBool('isDarkMode') ?? false;
+  final isDarkMode = await SharedPref().getBool(themeKey) ?? false;
   await initDependencies();
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => serviceLocator<ThemeBloc>()),
         BlocProvider(create: (context) => serviceLocator<OnboardBloc>()),
+        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
       ],
       child: MyApp(
         isDarkMode: isDarkMode,

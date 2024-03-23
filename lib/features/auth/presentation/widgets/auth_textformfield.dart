@@ -6,18 +6,24 @@ class AuthTextFormField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     required this.controller,
+    required this.textInputType,
   });
   final String hintText;
   final bool obscureText;
   final TextEditingController controller;
+  final TextInputType textInputType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardType: textInputType,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
+      maxLength: 25,
+      maxLines: 1,
       decoration: InputDecoration(
         border: InputBorder.none,
+        counterText: '',
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
         enabledBorder: OutlineInputBorder(
